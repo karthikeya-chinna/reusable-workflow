@@ -8,12 +8,37 @@ on:
         required: false
         default: "Default message from reusable workflow"
 
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+
+env:
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+  AWS_PROFILE: ${{ secrets.AWS_PROFILE }}
+
 jobs:
   bash-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: ${{ inputs.environment }}
+    
     steps:
-      - name: Run Bash
+      - name: pre test
+        run: |
+          echo "🔥 Reusable workflow is running"
+          echo "Message: ${{ env.AWS_ACCOUNT_ID }}"
+          echo "Profile: ${{ env.AWS_PROFILE }}"
+          echo "Done!"
+
+      - name: test
         run: |
           echo "🔥 Reusable workflow is running"
           echo "Message: ${{ inputs.msg }}"
+          echo "Done!"
+
+      - name: post test
+        run: |
+          echo "🔥 Reusable workflow is running"
+          echo "Message: ${{ env.AWS_ACCOUNT_ID }}"
+          echo "Profile: ${{ env.AWS_PROFILE }}"
           echo "Done!"
