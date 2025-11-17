@@ -1,0 +1,19 @@
+name: Bash Test Workflow
+
+on:
+  workflow_call:
+    inputs:
+      msg:
+        type: string
+        required: false
+        default: "Default message from reusable workflow"
+
+jobs:
+  bash-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Bash
+        run: |
+          echo "🔥 Reusable workflow is running"
+          echo "Message: ${{ inputs.msg }}"
+          echo "Done!"
