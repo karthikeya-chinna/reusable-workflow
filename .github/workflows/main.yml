@@ -7,6 +7,10 @@ on:
         type: string
         required: false
         default: "Default message from reusable workflow"
+      environment:
+        type: string
+        required: false
+        default: "dev-sandbox"
 
 permissions:
   id-token: write # This is required for requesting the JWT
